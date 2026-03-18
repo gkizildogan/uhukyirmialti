@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,left=25mm,right=25mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[square]{natbib}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{graphicx}
+\usepackage{subcaption}
+\captionsetup{font=sf, labelfont={sf,bf}}
+\renewcommand{\figurename}{Şekil}
+\renewcommand{\tablename}{Tablo}
+%\pdfcompresslevel=9
+%\def\shell_escape{1}
+
+\def\bildirino{UHUK-2026-000}
+\def\Baslik{YAPAY ZEKÂ TEMELLİ KESTİRİMCİ BAKIM: "IDG" FREKANS TAHMİNİ UYGULAMASI}
+\def\yazarlar{KIZILDOĞAN, THYYAZAR1, THYYAZAR2 ve THYYAZAR3}  %..Sadece yazarların soyadları
+\author{                                 %..Yazarlar
+    \parbox[t]{5cm}{\lsf\centering
+            Göksu Anıl Kızıldoğan\thanks{\ssf Analythinx,
+                            E-posta: goksu.kizildogan@analythinx.com}\\
+            \sf
+            Analythinx, Eskişehir}
+    \hspace*{4mm}
+    \parbox[t]{5cm}{\lsf\centering
+            ThyYazar1\thanks{\ssf Turkish Technology,
+                            E-posta: thyyazar1@thy.com}
+            ~,
+            Yazar 2\thanks{\ssf Turkish Technology,
+                            E-posta: thyyazar2@thy.com}
+            ~ve
+            Yazar 3\thanks{\ssf Turkish Technology,
+                            E-posta: thyyazar3@thy.com}\\
+            \sf
+            Turkish Technology, İstanbul}
+}
+
+%%%%%...Tanımlamalar...%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\font\sf=cmss10  scaled 1100
+\font\ssf=cmss10 scaled  900
+\font\lsf=cmss10 scaled 1200
+\font\bsf=cmssbx10 scaled 1100
+\font\lbsf=cmssbx10 scaled 1200
+\parindent 0pt \partopsep 3mm plus 1pt minus 1pt \parskip 3mm plus 1pt 
+\headheight 16pt
+\def\baslik#1{\vspace{2\abovedisplayskip}\centerline{\bsf #1}\nobreak\sloppy}
+\def\altbaslik#1{\vspace{\partopsep}{\bsf #1}\par\nobreak\sloppy}
+\def\altaltbaslik#1{\par\sf\underline{#1: }\nobreak}
+\def\refname{Kaynaklar}
+\lhead{\ssf \yazarlar}
+\rhead{\ssf \bildirino}
+\cfoot{\sf \thepage \\ \ssf Ulusal Havacılık ve Uzay Konferansı}
+\pagestyle{fancy}
+\begin{document}
+\thispagestyle{empty}
+\date{}
+\title{\sf 11. ULUSAL HAVACILIK VE UZAY KONFERANSI \hfill 
+       \lbsf \bildirino\\[-2mm]
+       \sf 17-19 Eylül 2026, Eskişehir Osmangazi Üniversitesi, Eskişehir \hfill~ \\[16mm]
+       \lbsf \Baslik }
+\maketitle
+\raggedright
+\sf
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\baslik{ÖZET}
+
+{\it Tek parağraflık özet bölümü italik fontla
+yazılmalı, 250 sözcüğü geçmemelidir. Bildiride
+sunulan çalışmanın amacı, kullanılan yöntem ve 
+elde edilen sonuçlar kısaca belirtilmelidir. }
+
+\baslik{GİRİŞ}
+
+Bildiri özetleri ve bildiriler A4 boyutundaki
+sayfalara, tek sütun, tek satır aralıklı olarak,
+11 punto, Sans Serif fontlarla (Helvetica, Arial,
+Tahoma, Verdana) hazırlanmalıdır. Tüm kenar boşlukları
+25mm, metin sola dayalı (left justified) olarak hece
+bölmeden yazılmalıdır. Paragraflar arası 3mm boşluk
+bırakılmalıdır. Sayfa sayısında bir sınırlama yoktur.
+
+Ana başlık ilk sayfanın üst kısmında ortalanarak 12
+punto, kalın Sans Serif fontla yazılmalıdır. Yazarların
+isim/kurum/şehir bilgileri her yazar için 3-satırlık
+bloklar halinde ana başlığın altında yatay olarak yer
+almalıdır. Yazarların ünvanları ve e-posta adresleri
+dipnotta verilmelidir. Kabul edilen bildirilere verilen
+Bildiri Numaraları ana başlığın üzerine kalın fontla
+eklenmelidir.
+
+Bölüm Başlıkları sayfada ortalanmalı, ve kalın punto,
+büyük harflerle yazılmalıdır.
+
+Üstbilgi satırına Bildiri Numarası (kabul edilen
+bildiri özetlerine verilen) ve yazarların soyadları
+yazılmalıdır. Altbilgi satırında Ulusal Havacılık ve Uzay
+Konferansı yazısı yer almalıdır.
+
+Şekil ve çizelgeler ortalanmalı (Şekil \ref{fig1}),
+ve metnin içinde verilmelidir.
+
+\begin{figure}[t]\centering
+%\includegraphics{sekil.pdf} \\
+\caption{Örnek şekil}
+\label{fig1}
+\end{figure}
+\newpage
+
+\altbaslik{İkincil Başlık}
+
+Birinci altbaşlıklar sola dayalı olarak kalın punto ile ve
+kelimelerin ilk harfi büyük olarak yazılmalıdır.
+
+\altaltbaslik{İkinci  Altbaşlık} İkinci  altbaşlıklar sola dayalı
+olarak ve altı çizili olarak verilmeli, metin hiç ara
+vermeden, başlığın bittiği yerden başlayarak yazılmalıdır.
+
+
+\baslik{YÖNTEM}
+
+Kaynaklar yazar-tarih yaklaşımı ile verilmelidir\citep{ref1}.
+Bildiri metninde kaynaklar köşeli parantez içerisinde 
+\citep{ref1,ref2}, Kaynaklar listesindeki alfabetik olarak yazar-tarih 
+sıralaması ile gösterilir.
+
+\baslik{UYGULAMALAR VE DEĞERLENDİRME}
+
+Çalışmada yapılan tüm uygulamalar, elde edilen detaylı
+sonuçlar, karşılaştırmalar, ve ilgili yorumlar
+bu bölümde yer almalıdır.
+
+
+\baslik{SONUÇ}
+
+Bu bölümde çalışmanın kısa bir değerlendirmesi yapılmalı,
+ulaşılan temel sonuçlara ve ileriye dönük tavsiyelere
+yer verilmelidir.
+
+%\newpage
+\begin{thebibliography}{99}
+\bibitem[SoyisimA(2022)]{ref1}
+   SoyisimA, İ., 2022.
+   {\it Yazar soyisimlerine göre alfabetik sırada  ilk referans..},
+   Konferans, Yer, 12-14 Haziran
+\bibitem[SoyisimB, SoyisimC ve SoyisimD(2021)]{ref2}
+   SoyisimB, J., SoyisimC, K. ve SoyisimD. L.,  2021.
+   {\it Yazar soyisimlerine göre alfabetik sırada  ikinci referans..},
+   Yayımcı Kuruluş,  Cilt.2, s.100-119
+
+\end{thebibliography}
+
+\end{document}
