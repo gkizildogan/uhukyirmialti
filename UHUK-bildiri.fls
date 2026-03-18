@@ -78,9 +78,16 @@ INPUT C:\Users\goksu\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi9.tfm
 INPUT C:\Users\goksu\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy9.tfm
 INPUT C:\Users\goksu\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm0600.tfm
 INPUT C:\Users\goksu\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
+INPUT .\images\gkizildogan_photo.png
+INPUT .\images\gkizildogan_photo.png
+INPUT .\images\gkizildogan_photo.png
+INPUT .\images\gkizildogan_photo.png
+OUTPUT UHUK-bildiri.pdf
+INPUT .\images\gkizildogan_photo.png
+INPUT .\images\gkizildogan_photo.png
+INPUT .\images\gkizildogan_photo.png
 INPUT C:\Users\goksu\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss10.tfm
 INPUT C:\Users\goksu\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssbx10.tfm
-OUTPUT UHUK-bildiri.pdf
 INPUT C:\Users\goksu\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\goksu\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
 INPUT C:\Users\goksu\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm

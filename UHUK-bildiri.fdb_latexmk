@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1773869606.71706 "d:/PYTHON/uhukyirmialti/UHUK-bildiri.tex" "UHUK-bildiri.pdf" "UHUK-bildiri" 1773869607.17709 0
+["pdflatex"] 1773870153.36529 "d:/PYTHON/uhukyirmialti/UHUK-bildiri.tex" "UHUK-bildiri.pdf" "UHUK-bildiri" 1773870154.21339 0
   "C:/Users/goksu/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1773868437 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/goksu/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm0600.pk" 1773868236 7284 9af3c0b369d0e7bbab1e5726fbda4fa1 ""
   "C:/Users/goksu/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm0800.pk" 1773868237 9292 a648cb31c1d3d8736a27b4ebca44b334 ""
@@ -52,9 +52,10 @@
   "C:/Users/goksu/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1749322634 4023 e66acf578d6b564c4670fb57ff336a7a ""
   "C:/Users/goksu/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1761202581 30662 bfd6e864f4ffc5018b0e2b6260c3181c ""
   "C:/Users/goksu/AppData/Local/Programs/MiKTeX/tex/latex/natbib/natbib.sty" 1292249081 46712 1c8843383c0bd05870c45fa0ebea6cc2 ""
-  "UHUK-bildiri.aux" 1773869607 393 c89849802c57e0d87688b2200340bfcb "pdflatex"
-  "UHUK-bildiri.tex" 1773869605 5362 88897eb6c454cf2c1e4b203c5080f690 ""
-  "d:/PYTHON/uhukyirmialti/UHUK-bildiri.tex" 1773869605 5362 88897eb6c454cf2c1e4b203c5080f690 ""
+  "UHUK-bildiri.aux" 1773870154 393 c89849802c57e0d87688b2200340bfcb "pdflatex"
+  "UHUK-bildiri.tex" 1773870152 5407 31767e116b5e7a553502332b2ce155a5 ""
+  "d:/PYTHON/uhukyirmialti/UHUK-bildiri.tex" 1773870152 5407 31767e116b5e7a553502332b2ce155a5 ""
+  "images/gkizildogan_photo.png" 1675172262 3093458 d1732fcd2fc4f993028bfd03f80816d5 ""
   (generated)
   "UHUK-bildiri.aux"
   "UHUK-bildiri.log"
