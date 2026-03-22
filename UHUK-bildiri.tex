@@ -12,24 +12,24 @@
 \renewcommand{\tablename}{Tablo}
 
 \def\bildirino{UHUK-2026-000}
-\def\Baslik{YAPAY ZEKÂ TEMELLİ KESTİRİMCİ BAKIM: ENTEGRE TAHRIK JENERATÖRÜ FREKANS ARIZA TAHMİNİ}
-\def\yazarlar{KIZILDOĞAN, THYYAZAR1, THYYAZAR2 ve THYYAZAR3}
+\def\Baslik{YAPAY ZEKÂ TEMELLİ KESTİRİMCİ BAKIM: ENTEGRE TAHRIK JENERATÖRÜ (IDG) FREKANS ARIZA TAHMİNİ}
+\def\yazarlar{KIZILDOĞAN, ÇELİK, ÖZYEŞİL ve DEĞER}
 \author{
     \parbox[t]{5cm}{\lsf\centering
             Göksu Anıl Kızıldoğan\thanks{\ssf Analythinx,
                             E-posta: goksu.kizildogan@analythinx.com}\\
             \sf
-            Analythinx, Eskişehir}
+            Analythinx, İstanbul}
     \hspace*{4mm}
     \parbox[t]{5cm}{\lsf\centering
-            ThyYazar1\thanks{\ssf Turkish Technology,
-                            E-posta: thyyazar1@thy.com}
+            Fevzi Furkan Çelik\thanks{\ssf Turkish Technology,
+                            E-posta: FEVZI.CELIK@THY.COM}
             ~,
-            Yazar 2\thanks{\ssf Turkish Technology,
-                            E-posta: thyyazar2@thy.com}
+            Gözde Özyeşil\thanks{\ssf Turkish Technology,
+                            E-posta: GOZDEOZYESIL@THY.COM}
             ~ve
             Yazar 3\thanks{\ssf Turkish Technology,
-                            E-posta: thyyazar3@thy.com}\\
+                            E-posta: NDEGER@THY.COM}\\
             \sf
             Turkish Technology, İstanbul}
 }
@@ -65,7 +65,7 @@
 
 \baslik{ÖZET}
 
-{\it Bu çalışmada, ticari havacılıkta kullanılan Entegre Tahrik Jeneratörü (ETJ/IDG) birimlerinin arıza öncesi dönemlerinin makine öğrenmesi yöntemleriyle tahmin edilmesi amaçlanmıştır. Uçak filosuna ait sol ve sağ IDG frekans verileri kullanılarak, operasyonel ortamda hangi tarafın arızalanacağının önceden bilinemeyeceği göz önünde bulundurulmuş ve taraf-bağımsız (simetrik) özellikler türetilmiştir. Frekans farkı, oran, nominal değerden sapma gibi dokuz adet simetrik özellik oluşturulmuş; bu özelliklerin ayırt edici güçleri korelasyon analizi, Mann-Whitney U testi, Kolmogorov-Smirnov testi, ROC AUC skoru ve lojistik regresyon tabanlı bileşik bir skorlama fonksiyonu ile değerlendirilmiştir. XGBoost, LightGBM, lojistik regresyon, rastgele orman, destek vektör makineleri ve ekstra ağaçlar olmak üzere altı farklı sınıflandırma modeli, filo düzeyinde bırakılan-bir-dışarıda (Leave-One-Out) çapraz doğrulama yaklaşımıyla karşılaştırılmıştır. Her doğrulama adımında yeni bir dayanıklı ölçekleyici (RobustScaler) uygulanarak veri sızıntısı önlenmiştir. Sonuçlar, XGBoost ve LightGBM modellerinin en yüksek F1 skorunu elde ettiğini, lojistik regresyonun ise aşırı öğrenmeden kaçınarak güçlü bir genelleme performansı sergilediğini göstermiştir. En iyi model üzerinde hiperparametre optimizasyonu ve eşik değeri ayarlaması gerçekleştirilerek sınıflandırma başarısı daha da artırılmıştır.}
+{\it Bu çalışmada, ticari havacılıkta kullanılan Entegre Tahrik Jeneratörü (ETJ/IDG) birimlerinin arıza öncesi dönemlerinin makine öğrenmesi yöntemleriyle tahmin edilmesi amaçlanmıştır. Uçak filosuna ait sol ve sağ IDG frekans verileri kullanılarak, operasyonel ortamda hangi tarafın arızalanacağının önceden bilinemeyeceği göz önünde bulundurulmuş ve taraf-bağımsız (simetrik) özellikler türetilmiştir. Frekans farkı, oran, nominal değerden sapma gibi dokuz adet simetrik özellik oluşturulmuş; bu özelliklerin ayırt edici güçleri korelasyon analizi, Kolmogorov-Smirnov (KS) testi, ROC AUC skoru ve AUC Stabilitesini ölçen bileşik bir skorlama fonksiyonu ile değerlendirilmiştir. XGBoost, LightGBM, lojistik regresyon, rassal orman, destek vektör makineleri ve ekstra ağaçlar olmak üzere altı farklı sınıflandırma modeli, filo düzeyinde bırakılan-bir-dışarıda (Leave-One-Out) çapraz doğrulama yaklaşımıyla karşılaştırılmıştır. Her doğrulama adımında yeni bir dayanıklı ölçekleyici (RobustScaler) uygulanarak veri sızıntısı önlenmiştir. Sonuçlar, XGBoost ve LightGBM modellerinin en yüksek F1 skorunu elde ettiğini, lojistik regresyonun ise aşırı öğrenmeden kaçınarak güçlü bir genelleme performansı sergilediğini göstermiştir. En iyi model üzerinde hiperparametre optimizasyonu ve eşik değeri ayarlaması gerçekleştirilerek sınıflandırma başarısı daha da artırılmıştır.}
 
 {\sf \textbf{Anahtar Kelimeler:} Kestirimci bakım, entegre tahrik jeneratörü, makine öğrenmesi, frekans tahmini, sınıflandırma, havacılık}
 
@@ -117,7 +117,7 @@ sum\_dev\_400 & $|f_L-400| + |f_R-400|$ & 400 Hz'den toplam sapma \\
 
 \altbaslik{Bileşik Özellik Değerlendirme Fonksiyonu}
 
-Her bir özelliğin arıza tahmini için ayırt edici gücünü ölçmek amacıyla beş farklı istatistiksel ve makine öğrenmesi tabanlı ölçüt birleştirilerek bileşik bir skorlama fonksiyonu oluşturulmuştur: (1) nokta-biserial korelasyon katsayısı, (2) Mann-Whitney U testi (1~$-$~p değeri), (3) Kolmogorov-Smirnov test istatistiği, (4) tekil özellik ROC AUC skoru ve (5) RobustScaler ile ölçeklendirme sonrası lojistik regresyon AUC skoru. Bu beş skorun ortalaması alınarak her özellik için bileşik bir değerlendirme skoru hesaplanmıştır (Şekil~\ref{fig:scoring}).
+Her bir özelliğin arıza tahmini için ayırt edici gücünü ölçmek amacıyla dört farklı istatistiksel ve makine öğrenmesi tabanlı ölçüt birleştirilerek bileşik bir skorlama fonksiyonu oluşturulmuştur: (1) tekil özellik ROC AUC skoru,(2) Kolmogorov-Smirnov test istatistiği, (3) nokta-biserial korelasyon katsayısı, (4) LOOCV (leave-one-out cross-validation) AUC Stabilitesi. Bu dört skorun ortalaması alınarak her özellik için bileşik bir değerlendirme skoru hesaplanmıştır (Şekil~\ref{fig:scoring}).
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.85\textwidth]{images/feature_scoring.png}
@@ -125,13 +125,23 @@ Her bir özelliğin arıza tahmini için ayırt edici gücünü ölçmek amacıy
 \label{fig:scoring}
 \end{figure}
 
+\altbaslik{Özellik Korelasyon Analizi ve Seçimi}
+
+Türetilen dokuz simetrik özellik arasındaki doğrusal ilişkiler, Pearson korelasyon matrisi kullanılarak incelenmiştir (Şekil~\ref{fig:correlation}). Matematiksel tanımları gereği bazı özellik çiftleri arasında yüksek doğrusal bağımlılık (çoklu doğrusallık) bulunmaktadır. Çoklu doğrusallık, model kararsızlığına ve gereksiz hesaplama yüküne yol açabileceğinden, eşik tabanlı bir korelasyon eleme yöntemi uygulanmıştır: aralarındaki mutlak Pearson korelasyonu 0{,}90'ı aşan özellik çiftlerinde, hedef değişken ile daha düşük nokta-biserial korelasyona sahip olan özellik elenmiştir. Bu yöntemle yedekli özellikler çıkarılmış, bilgi kaybı en aza indirilmiş ve model girdisi sadeleştirilmiştir. Eleme işlemi sonucunda \input{retained_features.tex} özellikleri modelleme aşamasına taşınmıştır.
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.80\textwidth]{images/feature_correlation.png}
+\caption{Türetilen simetrik özelliklerin Pearson korelasyon matrisi}
+\label{fig:correlation}
+\end{figure}
+
 \altbaslik{Sınıflandırma Modelleri}
 
-Altı farklı sınıflandırma algoritması değerlendirilmiştir: XGBoost~\citep{ref_chen}, LightGBM~\citep{ref_ke}, lojistik regresyon, rastgele orman, destek vektör makineleri (DVM) ve ekstra ağaçlar sınıflandırıcısı. Sınıf dengesizliğini ele almak için ağaç tabanlı modellerde \texttt{scale\_pos\_weight}, diğer modellerde ise \texttt{class\_weight='balanced'} parametresi kullanılmıştır.
+Altı farklı sınıflandırma algoritması değerlendirilmiştir: XGBoost~\citep{ref_chen}, LightGBM~\citep{ref_ke}, lojistik regresyon, rassal orman, destek vektör makineleri (DVM) ve ekstra ağaçlar sınıflandırıcısı. Sınıf dengesizliğini ele almak için ağaç tabanlı modellerde \texttt{scale\_pos\_weight}, diğer modellerde ise \texttt{class\_weight='balanced'} parametresi kullanılmıştır.
 
 \altbaslik{Filo Düzeyinde Çapraz Doğrulama}
 
-Modellerin gerçek operasyonel koşullardaki genelleme performansını ölçmek için bırakılan-bir-dışarıda (Leave-One-Out) çapraz doğrulama stratejisi uygulanmıştır. Her adımda bir uçak test, geri kalan uçaklar eğitim seti olarak ayrılmıştır. Veri sızıntısını önlemek amacıyla her doğrulama adımında ayrı bir RobustScaler öğrenilmiş ve uygulanmıştır. Performans değerlendirmesi için F1 skoru, kesinlik (precision), duyarlılık (recall), doğruluk (accuracy), ROC AUC ve PR AUC metrikleri hesaplanmıştır.
+Modellerin gerçek operasyonel koşullardaki genelleme performansını ölçmek için bir-dışarıda-bırakılan çapraz doğrulama (LOOCV, leave-one-out cross validation) stratejisi uygulanmıştır. Her adımda bir uçak test, geri kalan uçaklar eğitim seti olarak ayrılmıştır. Veri sızıntısını önlemek amacıyla her doğrulama adımında ayrı bir RobustScaler öğrenilmiş ve uygulanmıştır. Performans değerlendirmesi için F1 skoru, kesinlik (precision), duyarlılık (recall), doğruluk (accuracy), ROC AUC ve PR AUC metrikleri hesaplanmıştır.
 
 \altbaslik{Hiperparametre ve Eşik Optimizasyonu}
 
@@ -147,20 +157,19 @@ Altı sınıflandırma modelinin filo düzeyinde LOOCV sonuçları Tablo~\ref{ta
 \begin{table}[ht]\centering
 \caption{Model karşılaştırma sonuçları (LOOCV, arızalı uçaklar)}
 \label{tab:comparison}
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccccc}
 \toprule
-\textbf{Model} & \textbf{F1} & \textbf{Kesinlik} & \textbf{Duyarlılık} & \textbf{Doğruluk} & \textbf{ROC AUC} \\
+\textbf{Model} & \textbf{F1} & \textbf{Kesinlik} & \textbf{Duyarlılık} & \textbf{Doğruluk} & \textbf{ROC AUC} & \textbf{PR AUC} \\
 \midrule
-XGBoost        & --   & --   & --   & --   & -- \\
-LightGBM       & --   & --   & --   & --   & -- \\
-Lojistik Reg.  & --   & --   & --   & --   & -- \\
-Rastgele Orman & --   & --   & --   & --   & -- \\
-DVM            & --   & --   & --   & --   & -- \\
-Ekstra Ağaçlar & --   & --   & --   & --   & -- \\
+XGBoost & 0.628 & 0.545 & 0.742 & 0.900 & 0.884 & 0.735 \\
+LightGBM & 0.629 & 0.546 & 0.742 & 0.900 & 0.884 & 0.735 \\
+Lojistik Regresyon & 0.617 & 0.525 & 0.749 & 0.894 & 0.885 & 0.735 \\
+Rassal Orman & 0.633 & 0.555 & 0.739 & 0.902 & 0.886 & 0.735 \\
+DVM & 0.636 & 0.560 & 0.735 & 0.904 & 0.834 & 0.733 \\
+Ekstra Ağaçlar & 0.631 & 0.553 & 0.736 & 0.902 & 0.885 & 0.734 \\
 \bottomrule
 \end{tabular}
 
-{\ssf \textit{Not: Sayısal değerler \texttt{main.py} çalıştırıldıktan sonra güncellenmelidir.}}
 \end{table}
 
 \begin{figure}[ht]\centering

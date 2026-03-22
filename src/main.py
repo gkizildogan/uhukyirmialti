@@ -14,7 +14,10 @@ sys.path.insert(0, PROJECT_ROOT)
 
 from src.data_generator import generate_fleet_data
 from src.features import create_features, get_feature_names
-from src.scoring import score_features, plot_feature_scoring, plot_freq_boxplot
+from src.scoring import (
+    score_features, plot_feature_scoring, plot_freq_boxplot,
+    plot_feature_correlation, eliminate_correlated_features,
+)
 from src.models import (
     compare_models, tune_best_model,
     plot_roc_curves, plot_confusion_matrix,
@@ -52,6 +55,11 @@ def main():
     print("\n  Özellik Skorları:")
     print(score_df.to_string())
     plot_feature_scoring(score_df, os.path.join(images_dir, "feature_scoring.png"))
+
+    plot_feature_correlation(df, feature_cols, os.path.join(images_dir, "feature_correlation.png"))
+    feature_cols, dropped_features = eliminate_correlated_features(df, feature_cols, score_df)
+    print(f"\n  Elenen özellikler (|r| > 0.90): {dropped_features}")
+    print(f"  Kalan özellikler ({len(feature_cols)}): {feature_cols}")
 
     # 4. Model karşılaştırma
     print("\n[4/6] Model karşılaştırması (LOOCV)...")

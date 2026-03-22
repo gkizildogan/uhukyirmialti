@@ -15,7 +15,7 @@ import seaborn as sns
 from sklearn.preprocessing import RobustScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 from sklearn.metrics import (
     f1_score, precision_score, recall_score, accuracy_score,
     roc_auc_score, average_precision_score, confusion_matrix, roc_curve,
@@ -64,22 +64,29 @@ def get_models(pos_weight=3.0):
             n_estimators=200, max_depth=4, learning_rate=0.1,
             scale_pos_weight=pos_weight, eval_metric="logloss",
             use_label_encoder=False, verbosity=0, random_state=42,
+            n_jobs=-1,
         ),
         "LightGBM": LGBMClassifier(
             n_estimators=200, max_depth=4, learning_rate=0.1,
             scale_pos_weight=pos_weight, verbose=-1, random_state=42,
+            n_jobs=-1,
+
         ),
         "Lojistik Regresyon": LogisticRegression(
             class_weight="balanced", max_iter=1000, solver="lbfgs", random_state=42,
+            n_jobs=-1,
         ),
         "Random Forest": RandomForestClassifier(
             n_estimators=200, max_depth=6, class_weight="balanced", random_state=42,
+            n_jobs=-1,
         ),
-        "SVM": SVC(
-            class_weight="balanced", probability=True, kernel="rbf", random_state=42,
+        "Linear SVM": LinearSVC(
+            class_weight="balanced", max_iter=1000, random_state=42,
+            
         ),
         "Extra Trees": ExtraTreesClassifier(
             n_estimators=200, max_depth=6, class_weight="balanced", random_state=42,
+            n_jobs=-1,
         ),
     }
 
@@ -202,7 +209,7 @@ def tune_best_model(df, feature_cols, label_col="label"):
     for params in param_grid:
         model = XGBClassifier(
             scale_pos_weight=pw, eval_metric="logloss",
-            use_label_encoder=False, verbosity=0, random_state=42,
+            use_label_encoder=False, verbosity=0, random_state=42, n_jobs=-1,
             **params,
         )
         res = leave_one_out_cv(df, feature_cols, label_col, model)
@@ -232,6 +239,7 @@ def tune_best_model(df, feature_cols, label_col="label"):
 
     return {
         "best_params": best_params,
+        "base_metrics": best_result["aggregate"],
         "best_threshold": best_thresh,
         "metrics": final_metrics,
         "y_true": y_true,
@@ -277,8 +285,8 @@ def plot_confusion_matrix(y_true, y_pred, save_path, title="Karışıklık Matri
     fig, ax = plt.subplots(figsize=(6, 5))
     sns.heatmap(
         cm, annot=True, fmt="d", cmap="Blues",
-        xticklabels=["Normal", "Arıza Öncesi"],
-        yticklabels=["Normal", "Arıza Öncesi"],
+        xticklabels=["Sağlıklı", "Arızalı"],
+        yticklabels=["Sağlıklı", "Arızalı"],
         ax=ax, linewidths=1,
     )
     ax.set_xlabel("Tahmin", fontsize=12)
