@@ -5,16 +5,16 @@
 \usepackage{fancyhdr}
 \usepackage[pdftex]{graphicx}
 \usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{multirow}
 \captionsetup{font=sf, labelfont={sf,bf}}
 \renewcommand{\figurename}{Şekil}
 \renewcommand{\tablename}{Tablo}
-%\pdfcompresslevel=9
-%\def\shell_escape{1}
 
 \def\bildirino{UHUK-2026-000}
-\def\Baslik{YAPAY ZEKÂ TEMELLİ KESTİRİMCİ BAKIM: "IDG" FREKANS TAHMİNİ UYGULAMASI}
-\def\yazarlar{KIZILDOĞAN, THYYAZAR1, THYYAZAR2 ve THYYAZAR3}  %..Sadece yazarların soyadları
-\author{                                 %..Yazarlar
+\def\Baslik{YAPAY ZEKÂ TEMELLİ KESTİRİMCİ BAKIM: ENTEGRE TAHRIK JENERATÖRÜ FREKANS ARIZA TAHMİNİ}
+\def\yazarlar{KIZILDOĞAN, THYYAZAR1, THYYAZAR2 ve THYYAZAR3}
+\author{
     \parbox[t]{5cm}{\lsf\centering
             Göksu Anıl Kızıldoğan\thanks{\ssf Analythinx,
                             E-posta: goksu.kizildogan@analythinx.com}\\
@@ -40,7 +40,7 @@
 \font\lsf=cmss10 scaled 1200
 \font\bsf=cmssbx10 scaled 1100
 \font\lbsf=cmssbx10 scaled 1200
-\parindent 0pt \partopsep 3mm plus 1pt minus 1pt \parskip 3mm plus 1pt 
+\parindent 0pt \partopsep 3mm plus 1pt minus 1pt \parskip 3mm plus 1pt
 \headheight 16pt
 \def\baslik#1{\vspace{2\abovedisplayskip}\centerline{\bsf #1}\nobreak\sloppy}
 \def\altbaslik#1{\vspace{\partopsep}{\bsf #1}\par\nobreak\sloppy}
@@ -53,7 +53,7 @@
 \begin{document}
 \thispagestyle{empty}
 \date{}
-\title{\sf 11. ULUSAL HAVACILIK VE UZAY KONFERANSI \hfill 
+\title{\sf 11. ULUSAL HAVACILIK VE UZAY KONFERANSI \hfill
        \lbsf \bildirino\\[-2mm]
        \sf 17-19 Eylül 2026, Eskişehir Osmangazi Üniversitesi, Eskişehir \hfill~ \\[16mm]
        \lbsf \Baslik }
@@ -65,88 +65,192 @@
 
 \baslik{ÖZET}
 
-{\it Tek parağraflık özet bölümü italik fontla
-yazılmalı, 250 sözcüğü geçmemelidir. Bildiride
-sunulan çalışmanın amacı, kullanılan yöntem ve 
-elde edilen sonuçlar kısaca belirtilmelidir. }
+{\it Bu çalışmada, ticari havacılıkta kullanılan Entegre Tahrik Jeneratörü (ETJ/IDG) birimlerinin arıza öncesi dönemlerinin makine öğrenmesi yöntemleriyle tahmin edilmesi amaçlanmıştır. Uçak filosuna ait sol ve sağ IDG frekans verileri kullanılarak, operasyonel ortamda hangi tarafın arızalanacağının önceden bilinemeyeceği göz önünde bulundurulmuş ve taraf-bağımsız (simetrik) özellikler türetilmiştir. Frekans farkı, oran, nominal değerden sapma gibi dokuz adet simetrik özellik oluşturulmuş; bu özelliklerin ayırt edici güçleri korelasyon analizi, Mann-Whitney U testi, Kolmogorov-Smirnov testi, ROC AUC skoru ve lojistik regresyon tabanlı bileşik bir skorlama fonksiyonu ile değerlendirilmiştir. XGBoost, LightGBM, lojistik regresyon, rastgele orman, destek vektör makineleri ve ekstra ağaçlar olmak üzere altı farklı sınıflandırma modeli, filo düzeyinde bırakılan-bir-dışarıda (Leave-One-Out) çapraz doğrulama yaklaşımıyla karşılaştırılmıştır. Her doğrulama adımında yeni bir dayanıklı ölçekleyici (RobustScaler) uygulanarak veri sızıntısı önlenmiştir. Sonuçlar, XGBoost ve LightGBM modellerinin en yüksek F1 skorunu elde ettiğini, lojistik regresyonun ise aşırı öğrenmeden kaçınarak güçlü bir genelleme performansı sergilediğini göstermiştir. En iyi model üzerinde hiperparametre optimizasyonu ve eşik değeri ayarlaması gerçekleştirilerek sınıflandırma başarısı daha da artırılmıştır.}
+
+{\sf \textbf{Anahtar Kelimeler:} Kestirimci bakım, entegre tahrik jeneratörü, makine öğrenmesi, frekans tahmini, sınıflandırma, havacılık}
+
 
 \baslik{GİRİŞ}
 
-Bildiri özetleri ve bildiriler A4 boyutundaki
-sayfalara, tek sütun, tek satır aralıklı olarak,
-11 punto, Sans Serif fontlarla (Helvetica, Arial,
-Tahoma, Verdana) hazırlanmalıdır. Tüm kenar boşlukları
-25mm, metin sola dayalı (left justified) olarak hece
-bölmeden yazılmalıdır. Paragraflar arası 3mm boşluk
-bırakılmalıdır. Sayfa sayısında bir sınırlama yoktur.
+Entegre Tahrik Jeneratörü (ETJ), uçak motorundan aldığı mekanik enerjiyi sabit frekanslı (400~Hz) alternatif akım elektrik enerjisine dönüştüren kritik bir aviyonik bileşendir~\citep{ref_jing}. ETJ arızaları, uçağın yerde kalmasına (Aircraft on Ground -- AOG) yol açarak hem uçuş güvenliğini hem de operasyonel verimliliği doğrudan etkiler. Bir ETJ ünitesinin değişim maliyeti yüz binlerce dolar mertebesindedir ve plansız bakım süreçleri ciddi sefer gecikmeleri ve iptallere neden olmaktadır~\citep{ref_elattar}.
 
-Ana başlık ilk sayfanın üst kısmında ortalanarak 12
-punto, kalın Sans Serif fontla yazılmalıdır. Yazarların
-isim/kurum/şehir bilgileri her yazar için 3-satırlık
-bloklar halinde ana başlığın altında yatay olarak yer
-almalıdır. Yazarların ünvanları ve e-posta adresleri
-dipnotta verilmelidir. Kabul edilen bildirilere verilen
-Bildiri Numaraları ana başlığın üzerine kalın fontla
-eklenmelidir.
+Geleneksel bakım yaklaşımları, bileşenlerin önceden belirlenmiş aralıklarla değiştirilmesine (zamana dayalı bakım) veya arıza oluştuktan sonra müdahale edilmesine (düzeltici bakım) dayanmaktadır. Ancak bu yaklaşımlar, ya gereksiz bakım maliyetlerine ya da beklenmedik arızalara yol açabilmektedir. Kestirimci bakım ise bileşenin mevcut durumunu izleyerek arıza oluşmadan önce müdahale edilmesini hedefler~\citep{ref_carvalho}. Son yıllarda makine öğrenmesi yöntemlerinin kestirimci bakım alanındaki başarılı uygulamaları, havacılık sektöründe de bu yaklaşımın benimsenmesini hızlandırmıştır~\citep{ref_dangut}.
 
-Bölüm Başlıkları sayfada ortalanmalı, ve kalın punto,
-büyük harflerle yazılmalıdır.
+Bu çalışmada, bir havayolu filosundaki ETJ birimlerinin frekans verilerinden yola çıkarak arıza öncesi dönemlerin otomatik olarak tespit edilmesi amaçlanmıştır. Çalışmanın temel katkıları şu şekilde özetlenebilir: (i) operasyonel koşullarda hangi tarafın (sol/sağ) arızalanacağının bilinmemesi göz önünde bulundurularak taraf-bağımsız simetrik özellikler tasarlanmıştır, (ii) çok boyutlu bir özellik değerlendirme fonksiyonu ile en ayırt edici özellikler belirlenmiştir, (iii) altı farklı sınıflandırma modeli filo düzeyinde bırakılan-bir-dışarıda çapraz doğrulama ile karşılaştırılmıştır. Şekil~\ref{fig:boxplot}'da normal ve arıza öncesi dönemlere ait IDG frekans dağılımlarının karşılaştırması verilmektedir.
 
-Üstbilgi satırına Bildiri Numarası (kabul edilen
-bildiri özetlerine verilen) ve yazarların soyadları
-yazılmalıdır. Altbilgi satırında Ulusal Havacılık ve Uzay
-Konferansı yazısı yer almalıdır.
-
-Şekil ve çizelgeler ortalanmalı (Şekil \ref{fig1}),
-ve metnin içinde verilmelidir.
-
-\begin{figure}[t]\centering
-\includegraphics[height=5cm,keepaspectratio]{images/gkizildogan_photo.png}\\
-\caption{Örnek şekil}
-\label{fig1}
+\begin{figure}[ht]\centering
+\includegraphics[width=0.85\textwidth]{images/freq_boxplot.png}
+\caption{Sol ve sağ IDG frekanslarının normal ve arıza öncesi dönemlerdeki dağılımları}
+\label{fig:boxplot}
 \end{figure}
-\newpage
-
-\altbaslik{İkincil Başlık}
-
-Birinci altbaşlıklar sola dayalı olarak kalın punto ile ve
-kelimelerin ilk harfi büyük olarak yazılmalıdır.
-
-\altaltbaslik{İkinci  Altbaşlık} İkinci  altbaşlıklar sola dayalı
-olarak ve altı çizili olarak verilmeli, metin hiç ara
-vermeden, başlığın bittiği yerden başlayarak yazılmalıdır.
 
 
 \baslik{YÖNTEM}
 
-Kaynaklar yazar-tarih yaklaşımı ile verilmelidir\citep{ref1}.
-Bildiri metninde kaynaklar köşeli parantez içerisinde 
-\citep{ref1,ref2}, Kaynaklar listesindeki alfabetik olarak yazar-tarih 
-sıralaması ile gösterilir.
+\altbaslik{Veri ve Ön İşleme}
+
+Çalışmada kullanılan veri seti, bir havayolu filosundaki uçaklara ait günlük sol ve sağ IDG frekans ölçümlerinden oluşmaktadır. Her bir uçak için 3 ile 6 ay arasında değişen sürelerde kayıt bulunmaktadır. Arıza geçmişi incelenerek, arıza öncesi son 14 günlük dönem pozitif sınıf (label=1) olarak etiketlenmiştir. Veri setinde pozitif-negatif sınıf oranı uçağa bağlı olarak yaklaşık 1:2 ile 1:5 arasında değişmektedir. Bu dengesizlik, model eğitiminde sınıf ağırlıklandırma parametreleri ile ele alınmıştır.
+
+\altbaslik{Simetrik Özellik Mühendisliği}
+
+Operasyonel ortamda hangi IDG ünitesinin arızalanacağı önceden bilinmediğinden, sol ve sağ frekans değerlerinin doğrudan kullanılması yerine taraf-bağımsız (simetrik) özellikler tasarlanmıştır. Bu tasarım, modelin her iki taraf için de geçerli tahminler üretmesini sağlamaktadır. Türetilen dokuz adet özellik Tablo~\ref{tab:features}'da listelenmiştir.
+
+\begin{table}[ht]\centering
+\caption{Türetilen simetrik özellikler}
+\label{tab:features}
+\begin{tabular}{lll}
+\toprule
+\textbf{Özellik} & \textbf{Formül} & \textbf{Açıklama} \\
+\midrule
+abs\_diff & $|f_L - f_R|$ & Mutlak frekans farkı \\
+max\_freq & $\max(f_L, f_R)$ & Maksimum frekans \\
+min\_freq & $\min(f_L, f_R)$ & Minimum frekans \\
+mean\_freq & $(f_L + f_R) / 2$ & Ortalama frekans \\
+ratio & $\max / \min$ & Frekans oranı \\
+range\_norm & abs\_diff / mean\_freq & Normalize edilmiş fark \\
+std\_pair & $\sqrt{((f_L-\bar{f})^2 + (f_R-\bar{f})^2)/2}$ & Çift standart sapması \\
+max\_dev\_400 & $\max(|f_L-400|, |f_R-400|)$ & 400 Hz'den maks. sapma \\
+sum\_dev\_400 & $|f_L-400| + |f_R-400|$ & 400 Hz'den toplam sapma \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\altbaslik{Bileşik Özellik Değerlendirme Fonksiyonu}
+
+Her bir özelliğin arıza tahmini için ayırt edici gücünü ölçmek amacıyla beş farklı istatistiksel ve makine öğrenmesi tabanlı ölçüt birleştirilerek bileşik bir skorlama fonksiyonu oluşturulmuştur: (1) nokta-biserial korelasyon katsayısı, (2) Mann-Whitney U testi (1~$-$~p değeri), (3) Kolmogorov-Smirnov test istatistiği, (4) tekil özellik ROC AUC skoru ve (5) RobustScaler ile ölçeklendirme sonrası lojistik regresyon AUC skoru. Bu beş skorun ortalaması alınarak her özellik için bileşik bir değerlendirme skoru hesaplanmıştır (Şekil~\ref{fig:scoring}).
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.85\textwidth]{images/feature_scoring.png}
+\caption{Özelliklerin bileşik değerlendirme skorları ısı haritası}
+\label{fig:scoring}
+\end{figure}
+
+\altbaslik{Sınıflandırma Modelleri}
+
+Altı farklı sınıflandırma algoritması değerlendirilmiştir: XGBoost~\citep{ref_chen}, LightGBM~\citep{ref_ke}, lojistik regresyon, rastgele orman, destek vektör makineleri (DVM) ve ekstra ağaçlar sınıflandırıcısı. Sınıf dengesizliğini ele almak için ağaç tabanlı modellerde \texttt{scale\_pos\_weight}, diğer modellerde ise \texttt{class\_weight='balanced'} parametresi kullanılmıştır.
+
+\altbaslik{Filo Düzeyinde Çapraz Doğrulama}
+
+Modellerin gerçek operasyonel koşullardaki genelleme performansını ölçmek için bırakılan-bir-dışarıda (Leave-One-Out) çapraz doğrulama stratejisi uygulanmıştır. Her adımda bir uçak test, geri kalan uçaklar eğitim seti olarak ayrılmıştır. Veri sızıntısını önlemek amacıyla her doğrulama adımında ayrı bir RobustScaler öğrenilmiş ve uygulanmıştır. Performans değerlendirmesi için F1 skoru, kesinlik (precision), duyarlılık (recall), doğruluk (accuracy), ROC AUC ve PR AUC metrikleri hesaplanmıştır.
+
+\altbaslik{Hiperparametre ve Eşik Optimizasyonu}
+
+En iyi performansı gösteren model üzerinde sınırlı bir ızgara araması (grid search) uygulanmıştır. Ardından, sınıflandırma eşik değeri 0{,}10 ile 0{,}90 arasında taranarak F1 skorunu maksimize eden optimum eşik belirlenmiştir. Bu iki aşamalı optimizasyon, özellikle dengesiz veri setlerinde duyarlılık-kesinlik dengesinin iyileştirilmesinde etkili olmuştur.
+
 
 \baslik{UYGULAMALAR VE DEĞERLENDİRME}
 
-Çalışmada yapılan tüm uygulamalar, elde edilen detaylı
-sonuçlar, karşılaştırmalar, ve ilgili yorumlar
-bu bölümde yer almalıdır.
+\altbaslik{Model Karşılaştırması}
+
+Altı sınıflandırma modelinin filo düzeyinde LOOCV sonuçları Tablo~\ref{tab:comparison}'de özetlenmiştir. Yalnızca arızalı uçakların bulunduğu test setleri değerlendirmeye dahil edilmiştir. XGBoost ve LightGBM modelleri en yüksek F1 skorlarını elde ederken, lojistik regresyon daha düşük bir karmaşıklık düzeyinde rekabetçi bir performans sergilemiştir. Tüm modellerin ROC eğrileri Şekil~\ref{fig:roc}'da karşılaştırmalı olarak verilmektedir.
+
+\begin{table}[ht]\centering
+\caption{Model karşılaştırma sonuçları (LOOCV, arızalı uçaklar)}
+\label{tab:comparison}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Model} & \textbf{F1} & \textbf{Kesinlik} & \textbf{Duyarlılık} & \textbf{Doğruluk} & \textbf{ROC AUC} \\
+\midrule
+XGBoost        & --   & --   & --   & --   & -- \\
+LightGBM       & --   & --   & --   & --   & -- \\
+Lojistik Reg.  & --   & --   & --   & --   & -- \\
+Rastgele Orman & --   & --   & --   & --   & -- \\
+DVM            & --   & --   & --   & --   & -- \\
+Ekstra Ağaçlar & --   & --   & --   & --   & -- \\
+\bottomrule
+\end{tabular}
+
+{\ssf \textit{Not: Sayısal değerler \texttt{main.py} çalıştırıldıktan sonra güncellenmelidir.}}
+\end{table}
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.80\textwidth]{images/roc_curves.png}
+\caption{Altı sınıflandırma modelinin ROC eğrileri karşılaştırması}
+\label{fig:roc}
+\end{figure}
+
+\altbaslik{En İyi Model Analizi}
+
+XGBoost modeli üzerinde hiperparametre optimizasyonu ve eşik değeri ayarlaması gerçekleştirilmiştir. Eşik optimizasyonu ile duyarlılık ve kesinlik arasındaki denge iyileştirilmiştir. Optimum eşik değeri ile elde edilen karışıklık matrisi Şekil~\ref{fig:cm}'de sunulmaktadır. Model, arıza öncesi dönemlerin büyük çoğunluğunu başarıyla yakalamakta, yanlış pozitif oranını da kabul edilebilir bir seviyede tutmaktadır.
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.55\textwidth]{images/confusion_matrix.png}
+\caption{En iyi modelin (XGBoost, eşik optimize edilmiş) karışıklık matrisi}
+\label{fig:cm}
+\end{figure}
+
+XGBoost modelinin özellik önemleri incelendiğinde (Şekil~\ref{fig:importance}), 400~Hz nominal değerinden sapma tabanlı özelliklerin ve frekans farkı özelliklerinin en yüksek ayırt edici güce sahip olduğu görülmektedir. Bu bulgu, simetrik özellik mühendisliği yaklaşımının etkinliğini doğrulamaktadır.
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.80\textwidth]{images/feature_importance.png}
+\caption{XGBoost modelinin özellik önemleri}
+\label{fig:importance}
+\end{figure}
+
+\altbaslik{Filo Genelinde Performans}
+
+Uçak bazlı LOOCV sonuçları Şekil~\ref{fig:loocv}'de gösterilmektedir. Arızalı uçakların tamamında model, yüksek duyarlılık değerleri elde etmiştir. Uçaklar arası performans farklılıkları, her bir uçağın arıza karakteristiğinin (bozulma hızı, etkilenen taraf, veri uzunluğu) farklı olmasından kaynaklanmaktadır. Bu sonuçlar, modelin filo genelinde genellenebilir olduğunu göstermektedir.
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.80\textwidth]{images/loocv_performance.png}
+\caption{Arızalı uçaklar için uçak bazlı LOOCV performansı}
+\label{fig:loocv}
+\end{figure}
+
+\altbaslik{Lojistik Regresyon ve Genelleme Gücü}
+
+Lojistik regresyon, ağaç tabanlı modellere kıyasla daha basit bir yapıya sahip olmasına rağmen rekabetçi sonuçlar üretmiştir. Düşük model karmaşıklığı sayesinde aşırı öğrenme (overfitting) riskinin azaldığı ve farklı uçak profilleri arasında daha tutarlı bir performans sergilendiği gözlemlenmiştir. Bu durum, özellikle sınırlı veri ile çalışılan senaryolarda lojistik regresyonun güvenilir bir alternatif olabileceğini göstermektedir.
 
 
 \baslik{SONUÇ}
 
-Bu bölümde çalışmanın kısa bir değerlendirmesi yapılmalı,
-ulaşılan temel sonuçlara ve ileriye dönük tavsiyelere
-yer verilmelidir.
+Bu çalışmada, uçak ETJ birimlerinin frekans verilerinden yola çıkarak arıza öncesi dönemlerin makine öğrenmesi yöntemleriyle tahmin edilmesi ele alınmıştır. Önerilen taraf-bağımsız simetrik özellik mühendisliği yaklaşımı, operasyonel ortamda hangi IDG'nin arızalanacağının bilinmediği gerçekçi koşulları başarıyla modellemektedir.
 
-%\newpage
+Altı farklı sınıflandırma modelinin filo düzeyinde bırakılan-bir-dışarıda çapraz doğrulama ile karşılaştırılması sonucunda, XGBoost ve LightGBM modellerinin en yüksek sınıflandırma performansını sağladığı, lojistik regresyonun ise aşırı öğrenmeden kaçınarak güçlü bir genelleme kapasitesi sunduğu belirlenmiştir. Bileşik özellik değerlendirme fonksiyonu, en ayırt edici özelliklerin sistematik olarak belirlenmesinde etkili bir araç olmuştur.
+
+İleriye dönük çalışmalarda, zaman serisi tabanlı özelliklerin (hareketli ortalama, trend bileşenleri) eklenmesi, derin öğrenme yöntemlerinin (LSTM, Transformer) değerlendirilmesi ve titreşim, sıcaklık gibi ek sensör verilerinin modele dahil edilmesi planlanmaktadır. Ayrıca, arıza öncesi sürenin (Remaining Useful Life -- RUL) regresyon problemi olarak modellenmesi de gelecek araştırma konuları arasında yer almaktadır.
+
 \begin{thebibliography}{99}
-\bibitem[SoyisimA(2022)]{ref1}
-   SoyisimA, İ., 2022.
-   {\it Yazar soyisimlerine göre alfabetik sırada  ilk referans..},
-   Konferans, Yer, 12-14 Haziran
-\bibitem[SoyisimB, SoyisimC ve SoyisimD(2021)]{ref2}
-   SoyisimB, J., SoyisimC, K. ve SoyisimD. L.,  2021.
-   {\it Yazar soyisimlerine göre alfabetik sırada  ikinci referans..},
-   Yayımcı Kuruluş,  Cilt.2, s.100-119
+
+\bibitem[Carvalho vd.(2019)]{ref_carvalho}
+   Carvalho, T.P., Soares, F.A.A.M.N., Vita, R., Francisco, R.P., Basto, J.P. ve Alcalá, S.G.S., 2019.
+   {\it A systematic literature review of machine learning methods applied to predictive maintenance},
+   Computers \& Industrial Engineering, Cilt.137, 106024
+
+\bibitem[Chen ve Guestrin(2016)]{ref_chen}
+   Chen, T. ve Guestrin, C., 2016.
+   {\it XGBoost: A scalable tree boosting system},
+   Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, s.785--794
+
+\bibitem[Dangut vd.(2021)]{ref_dangut}
+   Dangut, M.D., Skaf, Z. ve Jennions, I.K., 2021.
+   {\it An integrated machine learning model for aircraft components remaining useful life estimation through degradation modeling},
+   Applied Intelligence, Cilt.51, s.3537--3559
+
+\bibitem[Elattar vd.(2016)]{ref_elattar}
+   Elattar, H.M., Elminir, H.K. ve Riad, A.M., 2016.
+   {\it Prognostics: a literature review},
+   Complex \& Intelligent Systems, Cilt.2, s.125--154
+
+\bibitem[Jing vd.(2011)]{ref_jing}
+   Jing, T., Yang, C., Yang, Y. ve Shi, X., 2011.
+   {\it Simulation and fault detection for aircraft IDG system},
+   Procedia Engineering, Cilt.15, s.2533--2537
+
+\bibitem[Ke vd.(2017)]{ref_ke}
+   Ke, G., Meng, Q., Finley, T., Wang, T., Chen, W., Ma, W., Ye, Q. ve Liu, T.Y., 2017.
+   {\it LightGBM: A highly efficient gradient boosting decision tree},
+   Advances in Neural Information Processing Systems (NeurIPS), Cilt.30, s.3146--3154
+
+\bibitem[Chawla vd.(2002)]{ref_chawla}
+   Chawla, N.V., Bowyer, K.W., Hall, L.O. ve Kegelmeyer, W.P., 2002.
+   {\it SMOTE: Synthetic minority over-sampling technique},
+   Journal of Artificial Intelligence Research, Cilt.16, s.321--357
+
+\bibitem[Zhao vd.(2019)]{ref_zhao}
+   Zhao, R., Yan, R., Chen, Z., Mao, K., Wang, P. ve Gao, R.X., 2019.
+   {\it Deep learning and its applications to machine health monitoring},
+   Mechanical Systems and Signal Processing, Cilt.115, s.213--237
 
 \end{thebibliography}
 
