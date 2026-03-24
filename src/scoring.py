@@ -216,8 +216,8 @@ def plot_freq_boxplot(df, save_path):
     df_plot["Durum"] = df_plot["label"].map(label_map)
 
     for i, (col, title) in enumerate([
-        ("freq_left", "Sol IDG Frekansı (Hz)"),
-        ("freq_right", "Sağ IDG Frekansı (Hz)"),
+        ("freq_left", "Sol ETJ Frekansı (Hz)"),
+        ("freq_right", "Sağ ETJ Frekansı (Hz)"),
     ]):
         sns.boxplot(data=df_plot, x="Durum", y=col, ax=axes[i],
                     palette=["#2ecc71", "#e74c3c"])
@@ -227,7 +227,7 @@ def plot_freq_boxplot(df, save_path):
         axes[i].axhline(y=400.0, color="gray", linestyle="--", alpha=0.5, label="400 Hz")
         axes[i].legend(loc="upper right", fontsize=9)
 
-    plt.suptitle("IDG Frekans Dağılımları: Sağlıklı ve Arızalı Dönem",
+    plt.suptitle("ETJ Frekans Dağılımları: Sağlıklı ve Arızalı Dönem",
                  fontsize=14, fontweight="bold", y=1.02)
     plt.tight_layout()
     fig.savefig(save_path, dpi=200, bbox_inches="tight")
