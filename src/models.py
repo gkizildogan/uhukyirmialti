@@ -278,7 +278,7 @@ def plot_roc_curves(results_dict, save_path):
     plt.close(fig)
     print(f"  -> Kaydedildi: {save_path}")
 
-
+        
 def plot_confusion_matrix(y_true, y_pred, save_path, title="Karışıklık Matrisi (En İyi Model)"):
     """Karışıklık matrisini ısı haritası olarak çizer (satır bazlı normalize edilmiş)."""
     cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
