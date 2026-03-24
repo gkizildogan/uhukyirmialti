@@ -280,14 +280,16 @@ def plot_roc_curves(results_dict, save_path):
 
 
 def plot_confusion_matrix(y_true, y_pred, save_path, title="Karışıklık Matrisi (En İyi Model)"):
-    """Karışıklık matrisini ısı haritası olarak çizer."""
+    """Karışıklık matrisini ısı haritası olarak çizer (satır bazlı normalize edilmiş)."""
     cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
+    cm_norm = cm.astype(float) / cm.sum(axis=1, keepdims=True)
+    annot = np.array([[f"{v:.2f}" for v in row] for row in cm_norm])
     fig, ax = plt.subplots(figsize=(6, 5))
     sns.heatmap(
-        cm, annot=True, fmt="d", cmap="Blues",
+        cm_norm, annot=annot, fmt="", cmap="Blues",
         xticklabels=["Sağlıklı", "Arızalı"],
         yticklabels=["Sağlıklı", "Arızalı"],
-        ax=ax, linewidths=1,
+        ax=ax, linewidths=1, vmin=0, vmax=1,
     )
     ax.set_xlabel("Tahmin", fontsize=12)
     ax.set_ylabel("Gerçek", fontsize=12)
