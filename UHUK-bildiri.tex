@@ -178,9 +178,11 @@ Ekstra Ağaçlar & 0.631 & 0.553 & 0.736 & 0.902 & 0.885 & 0.734 \\
 \label{fig:roc}
 \end{figure}
 
+Şekil~\ref{fig:roc}'da görüldüğü üzere, modellerin ROC eğrileri birbirine oldukça yakın seyretmektedir. Lojistik regresyon en yüksek AUC değerine (0{,}883) ulaşırken, LightGBM (0{,}878), XGBoost ve rassal orman (0{,}877) birbirine çok yakın performans sergilemiştir. Ekstra ağaçlar sınıflandırıcısı ise 0{,}856 AUC ile diğer modellerden bir miktar geride kalmıştır. Eğrilerin sol üst köşeye yakınlığı, tüm modellerin düşük yanlış pozitif oranlarında dahi anlamlı düzeyde doğru pozitif yakalama kapasitesine sahip olduğunu göstermektedir.
+
 \altbaslik{En İyi Model Analizi}
 
-XGBoost modeli üzerinde hiperparametre optimizasyonu ve eşik değeri ayarlaması gerçekleştirilmiştir. Eşik optimizasyonu ile duyarlılık ve kesinlik arasındaki denge iyileştirilmiştir. Optimum eşik değeri ile elde edilen karışıklık matrisi Şekil~\ref{fig:cm}'de sunulmaktadır. Model, arıza öncesi dönemlerin büyük çoğunluğunu başarıyla yakalamakta, yanlış pozitif oranını da kabul edilebilir bir seviyede tutmaktadır.
+XGBoost modeli üzerinde hiperparametre optimizasyonu ve eşik değeri ayarlaması gerçekleştirilmiştir. Eşik optimizasyonu ile duyarlılık ve kesinlik arasındaki denge iyileştirilmiştir. Optimum eşik değeri ile elde edilen karışıklık matrisi Şekil~\ref{fig:cm}'de sunulmaktadır. Şekil~\ref{fig:cm}'de görüldüğü üzere model, sağlıklı dönemlerin tamamını doğru sınıflandırırken (özgüllük = 1{,}00), arıza öncesi dönemlerin \%67'sini başarıyla tespit etmiştir (duyarlılık = 0{,}67). Sıfır yanlış pozitif oranı, gereksiz bakım müdahalelerinin önlenmesi açısından operasyonel bir avantaj sunmaktadır.
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.55\textwidth]{images/confusion_matrix.png}
@@ -188,7 +190,7 @@ XGBoost modeli üzerinde hiperparametre optimizasyonu ve eşik değeri ayarlamas
 \label{fig:cm}
 \end{figure}
 
-XGBoost modelinin özellik önemleri incelendiğinde (Şekil~\ref{fig:importance}), 400~Hz nominal değerinden sapma tabanlı özelliklerin ve frekans farkı özelliklerinin en yüksek ayırt edici güce sahip olduğu görülmektedir. Bu bulgu, simetrik özellik mühendisliği yaklaşımının etkinliğini doğrulamaktadır.
+XGBoost modelinin özellik önemleri incelendiğinde (Şekil~\ref{fig:importance}), \texttt{min\_freq} özelliğinin yaklaşık 0{,}97 önem skoruyla baskın bir şekilde öne çıktığı görülmektedir. \texttt{max\_freq} ve \texttt{range\_norm} özellikleri ise çok düşük katkı sağlamıştır. Bu durum, arıza öncesi dönemlerde ETJ frekansının alt sınırındaki düşüşlerin en belirleyici gösterge olduğuna işaret etmektedir.
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.80\textwidth]{images/feature_importance.png}
@@ -198,7 +200,7 @@ XGBoost modelinin özellik önemleri incelendiğinde (Şekil~\ref{fig:importance
 
 \altbaslik{Filo Genelinde Performans}
 
-Uçak bazlı LOOCV sonuçları Şekil~\ref{fig:loocv}'de gösterilmektedir. Arızalı uçakların tamamında model, yüksek duyarlılık değerleri elde etmiştir. Uçaklar arası performans farklılıkları, her bir uçağın arıza karakteristiğinin (bozulma hızı, etkilenen taraf, veri uzunluğu) farklı olmasından kaynaklanmaktadır. Bu sonuçlar, modelin filo genelinde genellenebilir olduğunu göstermektedir.
+Uçak bazlı LOOCV sonuçları Şekil~\ref{fig:loocv}'de gösterilmektedir. AC\_4 ve AC\_5 uçaklarında F1 skoru 0{,}95'in üzerinde olup kesinlik, duyarlılık ve F1 metrikleri birbirine çok yakın ve yüksek değerler almıştır. AC\_3 uçağında da F1 skoru yaklaşık 0{,}90 ile güçlü bir performans gözlemlenmiştir. Öte yandan AC\_1 ve AC\_2 uçaklarında performans belirgin şekilde düşüktür; AC\_1'de yüksek kesinliğe rağmen duyarlılık çok düşük kalmıştır. Bu farklılıklar, her bir uçağın arıza karakteristiğinin (bozulma hızı, etkilenen taraf, veri uzunluğu) farklı olmasından kaynaklanmaktadır. Sonuçlar, modelin filo genelinde çoğunlukla başarılı olduğunu ancak bazı atipik arıza profillerinde performansın düşebildiğini ortaya koymaktadır.
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.80\textwidth]{images/loocv_performance.png}
